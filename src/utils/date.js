@@ -33,4 +33,6 @@ export const monthAliases = ['Январь', 'Февряль', 'Март', 'Ап
 export const getMonthAlias = monthId => monthAliases[monthId];
 
 export const weekDayAliases = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-export const getweekDayAlias = dayId => weekDayAliases[dayId];
+export const getWeekDayAlias = dayId => weekDayAliases[dayId];
+
+export const formatDate = date => `${getWeekDayAlias(date.getDay())}, ${getMonthAlias(date.getMonth())} ${date.getDate()}`;

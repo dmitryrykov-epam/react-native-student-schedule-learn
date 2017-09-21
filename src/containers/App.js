@@ -39,6 +39,7 @@ class App extends React.PureComponent {
             <View style={ styles.page }>
                 <PageHeader />
                 <Calendar />
+                <Schedule />
             </View>
         </View>
     );
