@@ -65,8 +65,8 @@ v7.7.1
 >> Ваше мобильное устройство должно находиться в одной сети с вашим компьютером.
 
 1. Скачайте приложение `Expo` на свое мобильное устройство.
-    - Google play [QR Expo Client on Google Play](https://github.com/dmitryrykov-epam/react-native-student-schedule-learn/tree/master/lessons/assets/g-play-expo.png)
-    - AppStore [QR Expo Client on AppStore](https://github.com/dmitryrykov-epam/react-native-student-schedule-learn/tree/master/lessons/assets/i-store-expo.png)
+    - Google play ![QR Expo Client on Google Play](https://github.com/dmitryrykov-epam/react-native-student-schedule-learn/tree/master/lessons/assets/g-play-expo.png)
+    - AppStore ![QR Expo Client on AppStore](https://github.com/dmitryrykov-epam/react-native-student-schedule-learn/tree/master/lessons/assets/i-store-expo.png)
 2. Запустите приложение на мобильном устройстве.
 3. На компьютере в терминале/консоли перейдите в корневую директорию проекта и запустите команду `npm start`
 4. Подождите, пока в выводе терминала/консоли не появится QR-код
