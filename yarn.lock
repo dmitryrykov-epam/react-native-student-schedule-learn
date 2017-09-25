@@ -3811,19 +3811,6 @@ node-pre-gyp@^0.6.36:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-node-schedule-epm-task@dmitryrykov-epam/node-schedule-epm-task#v1.1.1:
-  version "1.0.1"
-  resolved "https://codeload.github.com/dmitryrykov-epam/node-schedule-epm-task/tar.gz/ad7e1ca03df520f56ff743f5c1fc21c805df6d29"
-  dependencies:
-    express "^4.15.4"
-
-node-schedule-epm-task@dmitryrykov-epam/node-schedule-epm-task#v1.1.2:
-  version "1.0.1"
-  resolved "https://codeload.github.com/dmitryrykov-epam/node-schedule-epm-task/tar.gz/34aabc29864728eff81d4add41b0655dacfb4d10"
-  dependencies:
-    express "^4.15.4"
-    ip "^1.1.5"
-
 noop-fn@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/noop-fn/-/noop-fn-1.0.0.tgz#5f33d47f13d2150df93e0cb036699e982f78ffbf"

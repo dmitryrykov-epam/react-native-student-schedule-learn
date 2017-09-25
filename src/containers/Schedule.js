@@ -1,7 +1,7 @@
 import formatDate  from 'date-fns/format';
 import { connect } from 'react-redux';
 
-import Schedule from './../components/schedule';
+import { Schedule } from './../components/schedule';
 
 const getIsNumerator = (date, isNumeratorOdd) => {
     const isOdd = (0 + formatDate(date, 'W')) % 2 === 0;

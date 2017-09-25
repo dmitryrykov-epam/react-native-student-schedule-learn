@@ -13,21 +13,19 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "server": "node-schedule-epm-task",
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
-    "date-fns": "^1.28.5",
-    "expo": "^20.0.0",
-    "node-schedule-epm-task": "dmitryrykov-epam/node-schedule-epm-task#v1.1.2",
-    "prop-types": "^15.5.10",
+    "date-fns": "1.28.5",
+    "expo": "20.0.0",
+    "prop-types": "15.5.10",
     "react": "16.0.0-alpha.12",
-    "react-native": "^0.47.0",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "react-native": "0.47.0",
+    "react-redux": "5.0.6",
+    "redux": "3.7.2",
+    "redux-thunk": "2.2.0"
   }
 }
