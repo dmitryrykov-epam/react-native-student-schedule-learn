@@ -24,6 +24,31 @@ const formatDays = (date, schedule, isHighlighted) => {
     return result;
 };
 
+// Данная функция проходит по всем элементам массива и преобразует их
+function renderWeek(days) {
+    // Здесь мы инициализируем массив, в который будем складывать изменные элементы
+    const result = [];
+
+    // Используем цикл `for` для прохода по массиву - он более наглядный и подходит для обучения
+    for (let i = 0; i < days.length; i++) {
+        // Получаем элемент из массива по текущему индексу. Этот элемент мы и будем изменять.
+        const day = days[i];
+        
+        // Здесь мы проверяем, заполнен ли данный элемент данными
+        // (пустые данные тоже данные, но для показа они нам не нужны)
+        if (day) {
+            // Изменяем элемент как нам надо
+            // Сейчас мы никак не используем переменную `day`, это должны сделать вы сами
+            const changedElement = <Text>Здесь должен быть компонент "Расписание на день" (DaySchedule)</Text>;
+            // И, наконец, мы добавляем измененный элемент в конец результирующего массива
+            result.push(changedElement);
+        }
+    }
+
+    // ...и выводим результат
+    return result;
+}
+
 export const Schedule = (props) => {
     const schedule = props.isNumerator ? props.numerator : props.denominator;
     const days = formatDays(props.date, schedule, props.isHighlighted);
