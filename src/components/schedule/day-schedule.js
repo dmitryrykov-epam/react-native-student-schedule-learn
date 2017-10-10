@@ -6,7 +6,9 @@ import { Lesson } from './lesson';
 
 import { formatDate } from './../../utils/date';
 
-export const DaySchedule = (props) => null;
+export const DaySchedule = (props) => (
+    <Text>Я - компонент "Расписание за день" (DaySchedule). Замени эту строку в коде.</Text>
+);
 
 DaySchedule.propTypes = {
     isHighlighted: PropTypes.func.isRequired,

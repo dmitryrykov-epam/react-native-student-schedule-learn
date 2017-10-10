@@ -28,7 +28,7 @@ export const Schedule = (props) => {
     const schedule = props.isNumerator ? props.numerator : props.denominator;
     const days = formatDays(props.date, schedule, props.isHighlighted);
 
-    return null;
+    return <Text>Я - компонент "Расписание" (Schedule). Замени эту строку в коде</Text>;
 };
 
 Schedule.propTypes = {
