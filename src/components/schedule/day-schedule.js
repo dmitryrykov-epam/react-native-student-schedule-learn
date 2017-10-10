@@ -9,7 +9,7 @@ import { formatDate } from './../../utils/date';
 export const DaySchedule = (props) => null;
 
 DaySchedule.propTypes = {
-    isHightlighted: PropTypes.func.isRequired,
+    isHighlighted: PropTypes.func.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
     lessons: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

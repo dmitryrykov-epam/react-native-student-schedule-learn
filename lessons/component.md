@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'white',
     },
-    hightlighted: {
+    highlighted: {
         backgroundColor: 'yellow',
     }
 });
 
 const Component = () => (
-    <View style={ StyleSheet.flatten([styles.wrapper, styles.hightlighted]) }>
+    <View style={ StyleSheet.flatten([styles.wrapper, styles.highlighted]) }>
         <Text>text</Text>
     </View>
 );
@@ -217,7 +217,7 @@ export const DaySchedule = (props) => {
 Согласитесь, что по значению одной лишь даты, узнать расписание довольно-таки проблематично, поэтому давайте создадим полноценный компонент `DaySchedule`
 Данный компонент будет отображать расписания за день. Для этого нужно показать не только дату, но и список занятий.
 
-Сейчас все данные, которые были получены `DaySChedule` находятся в его аргументе
+Сейчас все данные, которые были получены `DaySchedule` находятся в его аргументе
 Разберемся какие данные он содержит:
 
 > date - дата дня
@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
 
 Для того, что бы объединить стили существует функция `StyleSheet.flatten`. Она принимает единственный аргумент - массив стилей. Используя эту функцию, объедините стили `wrapper` и `highlight` для верхнего компонента `View`.
 ```jsx
-<View style={ StyleSheet.fatten([ styles.wrapper, styles.highlight ]) } >...</View>
+<View style={ StyleSheet.flatten([ styles.wrapper, styles.highlight ]) } >...</View>
 ```
 
 Теперь у нас занятия подсвечиваются, правда все. Нам нужно добавить условие на применение этого стиля `highlight`. Для этого мы можем использовать тернарное выражение.

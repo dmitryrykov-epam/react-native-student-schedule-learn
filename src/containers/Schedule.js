@@ -9,8 +9,8 @@ const getIsNumerator = (date, isNumeratorOdd) => {
 }
 
 const isNotHighlighted = () => lesson => false;
-const isLessonHighlighted = name => lesson => lesson && lesson.name === name;
-const isLectorHighlighted = name => lesson => lesson && lesson.lector && lesson.lector.indexOf(name) > -1;
+const isLessonHighlighted = name => lesson => !!(lesson && lesson.name === name);
+const isLectorHighlighted = name => lesson => !!(lesson && lesson.lector && lesson.lector.indexOf(name) > -1);
 
 const getIsHighlightedFn = searchType => {
     switch (searchType) {

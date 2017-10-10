@@ -14,9 +14,9 @@ const formatDays = (date, schedule, isHighlighted) => {
         for (let index = 0; index < days.length; index++) {
             if (schedule[index]) {
                 result.push({
+                    isHighlighted,
                     date: days[index],
-                    schedule: schedule[index],
-                    isHighlighted: isHighlighted,
+                    lessons: schedule[index],
                 });
             }
         }
