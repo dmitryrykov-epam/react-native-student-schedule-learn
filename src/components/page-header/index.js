@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Constants } from 'expo';
 import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native';
 
 export default class PageHeader extends React.PureComponent {
@@ -26,11 +27,11 @@ export default class PageHeader extends React.PureComponent {
 
 const styles = StyleSheet.create({
     wrapper: {
-        height: 48,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingTop: Constants.statusBarHeight,
         paddingRight: 40,
         backgroundColor: '#FFFFFF',
         elevation: 5,
@@ -44,6 +45,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     text: {
-        fontSize: 28,
+        fontSize: 23,
     }
 });
