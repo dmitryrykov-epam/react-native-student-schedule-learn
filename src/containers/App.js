@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, BackHandler } from 'react-native';
 import { bindActionCreators } from 'redux';
 
-import { requestSchedule, loadIsNumeratorOdd } from './../store/actions';
+import { requestSchedule, loadIsNumeratorOdd, clearSearch, closeMenu } from './../store/actions';
 
 import Menu from './Menu';
 import MenuContent from './MenuContent';
@@ -22,14 +22,35 @@ class App extends React.PureComponent {
     static propTypes = {
         onRefresh: PropTypes.func.isRequired,
         loadIsNumeratorOdd: PropTypes.func.isRequired,
+        clearSearch: PropTypes.func.isRequired,
+        closeMenu: PropTypes.func.isRequired,
         isFetching: PropTypes.bool.isRequired,
         isSuccess: PropTypes.bool.isRequired,
+        isMenuOpened: PropTypes.bool.isRequired,
+        isSearching: PropTypes.bool.isRequired,
     }
 
     componentWillMount = () => {
         this.props.loadIsNumeratorOdd();
         this.props.onRefresh('rsreu', 715);
+        BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonPress);
     };
+
+    componentWillUnmount = () => {
+        BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonPress);
+    }
+
+    handleBackButtonPress = () => {
+        if (this.props.isSearching) {
+            this.props.clearSearch();
+            return true;
+        }
+        if (this.props.isMenuOpened) {
+            this.props.closeMenu();
+            return true;
+        }
+        return false;
+    }
 
     render = () => (
         <View style={ styles.wrapper } >
@@ -65,10 +86,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
     isFetching: state.schedule.isFetching,
     isSuccess: state.schedule.isSuccess,
+    isMenuOpened: state.menu.isOpened,
+    isSearching: !!state.search.keyword,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     loadIsNumeratorOdd,
+    clearSearch,
+    closeMenu,
     onRefresh: requestSchedule,
 }, dispatch);
 
