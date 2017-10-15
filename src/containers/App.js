@@ -11,6 +11,7 @@ import MenuContent from './MenuContent';
 import PageHeader from './PageHeader';
 import Calendar from './Calendar';
 import Schedule from './Schedule';
+import Popup from './Popup';
 
 const Spinner = () => (
     <View style={ styles.spinnerWrapper }>
@@ -57,6 +58,9 @@ class App extends React.PureComponent {
             <Menu>
                 <MenuContent />
             </Menu>
+            <Popup opened >
+                <Text>Here it comes the Text</Text>
+            </Popup>
             <View style={ styles.page }>
                 <PageHeader />
                 <Calendar />

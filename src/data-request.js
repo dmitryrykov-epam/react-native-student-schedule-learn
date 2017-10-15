@@ -33,3 +33,23 @@ export const getIsNumeratorOdd = () => AsyncStorage
 export const saveIsNumeratorOdd = isOdd => AsyncStorage
     .setItem(`${storageAppPrefix}:isNumeratorOdd`, JSON.stringify(isOdd))
     .then(() => isOdd);
+
+export const getUniversity = () => AsyncStorage
+    .getItem(`${storageAppPrefix}:university`)
+    .then(data => JSON.parse(data))
+    .then(data => typeof data === 'string' ? data : null)
+    .catch(() => null);
+
+export const saveUniversity = university => AsyncStorage
+    .setItem(`${storageAppPrefix}:university`, JSON.stringify(university))
+    .then(() => university);
+    
+export const getGroup = () => AsyncStorage
+    .getItem(`${storageAppPrefix}:group`)
+    .then(data => JSON.parse(data))
+    .then(data => typeof data === 'string' ? data : null)
+    .catch(() => null);
+
+export const saveGroup = university => AsyncStorage
+    .setItem(`${storageAppPrefix}:group`, JSON.stringify(university))
+    .then(() => university);

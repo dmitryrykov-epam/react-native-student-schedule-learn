@@ -7,6 +7,8 @@ export const FETCH_DATA_FINISHED = 'FETCH_DATA_FINISHED';
 export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED';
 export const MENU_OPEN = 'MENU/OPEN';
 export const MENU_CLOSE = 'MENU/CLOSE';
+export const POPUP_OPEN = 'POPUP/OPEN';
+export const POPUP_CLOSE = 'POPUP/CLOSE';
 export const SEARCH_LECTOR = 'SEARCH/LECTOR';
 export const SEARCH_LESSON = 'SEARCH/LESSON';
 export const SEARCH_CLEAR = 'SEARCH/CLEAR';
@@ -23,6 +25,10 @@ export const requestSchedule = (university, groupId, force = false) => dispatch 
 export const openMenu = () => dispatch => dispatch({ type: MENU_OPEN });
 
 export const closeMenu = () => dispatch => dispatch({ type: MENU_CLOSE });
+
+export const openPopup = () => dispatch => dispatch({ type: POPUP_OPEN });
+
+export const closePopup = () => dispatch => dispatch({ type: POPUP_CLOSE });
 
 export const clearSearch = () => dispatch => dispatch({ type: SEARCH_CLEAR });
 
