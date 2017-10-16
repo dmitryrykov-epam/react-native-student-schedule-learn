@@ -53,3 +53,9 @@ export const getGroup = () => AsyncStorage
 export const saveGroup = university => AsyncStorage
     .setItem(`${storageAppPrefix}:group`, JSON.stringify(university))
     .then(() => university);
+
+export const getUniversitiesList = () => fetch(`${dataServerDomain}/list`)
+    .then(response => response.json());
+
+export const getGroupsList = uni => fetch(`${dataServerDomain}/${uni}/list`)
+    .then(response => response.json());

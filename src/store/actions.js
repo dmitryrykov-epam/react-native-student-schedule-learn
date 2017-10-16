@@ -1,19 +1,42 @@
-import { AsyncStorage } from 'react-native';
-
-import { getSchedule, getIsNumeratorOdd, saveIsNumeratorOdd } from './../data-request';
+import {
+    getSchedule,
+    getIsNumeratorOdd,
+    saveIsNumeratorOdd,
+    getGroup,
+    getUniversity,
+    saveGroup,
+    saveUniversity,
+    getGroupsList,
+    getUniversitiesList,
+} from './../data-request';
 
 export const FETCH_DATA_START = 'FETCH_DATA_START';
 export const FETCH_DATA_FINISHED = 'FETCH_DATA_FINISHED';
 export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED';
+
 export const MENU_OPEN = 'MENU/OPEN';
 export const MENU_CLOSE = 'MENU/CLOSE';
+
 export const POPUP_OPEN = 'POPUP/OPEN';
 export const POPUP_CLOSE = 'POPUP/CLOSE';
+
 export const SEARCH_LECTOR = 'SEARCH/LECTOR';
 export const SEARCH_LESSON = 'SEARCH/LESSON';
 export const SEARCH_CLEAR = 'SEARCH/CLEAR';
+
 export const DATE_SET_DATE = 'DATE/SET_DATE';
 export const DATE_SET_IS_NUMERATOR_ODD = 'DATE/SET_IS_NUMERATOR_ODD';
+
+export const SETTINGS_SELECT_UNIVERSITY = 'SETTINGS/SELECT_UNIVERSITY';
+export const SETTINGS_SELECT_GROUP = 'SETTINGS/SELECT_GROUP';
+
+export const FETCH_UNIVERSITIES_START = 'FETCH_UNIVERSITIES_START';
+export const FETCH_UNIVERSITIES_FINISHED = 'FETCH_UNIVERSITIES_FINISHED';
+export const FETCH_UNIVERSITIES_FAILED = 'FETCH_UNIVERSITIES_FAILED';
+
+export const FETCH_GROUPS_START = 'FETCH_GROUPS_START';
+export const FETCH_GROUPS_FINISHED = 'FETCH_GROUPS_FINISHED';
+export const FETCH_GROUPS_FAILED = 'FETCH_GROUPS_FAILED';
 
 export const requestSchedule = (university, groupId, force = false) => dispatch => {
     dispatch({ type: FETCH_DATA_START });
@@ -43,3 +66,17 @@ export const setIsNumeratorOdd = isOdd => dispatch => saveIsNumeratorOdd(isOdd)
 
 export const loadIsNumeratorOdd = () => dispatch => getIsNumeratorOdd()
     .then(isOdd => dispatch({ type: DATE_SET_IS_NUMERATOR_ODD, payload: isOdd }));
+
+export const selectUniversity = uni => dispatch => saveUniversity(uni)
+    .then(() => dispatch({ type: SETTINGS_SELECT_UNIVERSITY, payload: uni }));
+
+export const selectGroup = group => dispatch => saveGroup(group)
+    .then(() => dispatch({ type: SETTINGS_SELECT_GROUP, payload: group }));
+
+export const requestUniversitiesList = () => dispatch => getUniversitiesList()
+    .then(list => dispatch({ type: FETCH_UNIVERSITIES_FINISHED, payload: list }))
+    .catch(() => dispatch({ type: FETCH_UNIVERSITIES_FAILED }));
+
+export const requestGroupsList = () => dispatch => getGroupsList()
+    .then(list => dispatch({ type: FETCH_GROUPS_FINISHED, payload: list }))
+    .catch(() => dispatch({ type: FETCH_GROUPS_FAILED }));

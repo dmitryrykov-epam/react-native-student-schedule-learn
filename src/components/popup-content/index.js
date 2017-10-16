@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, Switch, Picker } from 'react-native';
 
 export const PopupContent = ({
@@ -32,3 +33,25 @@ export const PopupContent = ({
         }
     </View>
 );
+
+PopupContent.propTypes = {
+    isSelectedWeekNumerator: PropTypes.bool,
+    switchIsSelectedWeekNumerator: PropTypes.func,
+    selectedUniversity: PropTypes.string,
+    universitiesList: PropTypes.arrayOf(PropTypes.string),
+    onUniversitySelect: PropTypes.func,
+    selectedGroup: PropTypes.string,
+    groupsList: PropTypes.arrayOf(PropTypes.string),
+    onGroupSelect: PropTypes.func,
+}
+
+PopupContent.defaultProps = {
+    isSelectedWeekNumerator: true,
+    switchIsSelectedWeekNumerator: () => {},
+    selectedUniversity: null,
+    universitiesList: [],
+    onUniversitySelect: () => {},
+    selectedGroup: null,
+    groupsList: [],
+    onGroupSelect: () => {},
+}
