@@ -30,19 +30,11 @@ export const DATE_SET_IS_NUMERATOR_ODD = 'DATE/SET_IS_NUMERATOR_ODD';
 export const SETTINGS_SELECT_UNIVERSITY = 'SETTINGS/SELECT_UNIVERSITY';
 export const SETTINGS_SELECT_GROUP = 'SETTINGS/SELECT_GROUP';
 
-export const FETCH_UNIVERSITIES_START = 'FETCH_UNIVERSITIES_START';
-export const FETCH_UNIVERSITIES_FINISHED = 'FETCH_UNIVERSITIES_FINISHED';
-export const FETCH_UNIVERSITIES_FAILED = 'FETCH_UNIVERSITIES_FAILED';
-
-export const FETCH_GROUPS_START = 'FETCH_GROUPS_START';
-export const FETCH_GROUPS_FINISHED = 'FETCH_GROUPS_FINISHED';
-export const FETCH_GROUPS_FAILED = 'FETCH_GROUPS_FAILED';
-
 export const requestSchedule = (university, groupId, force = false) => dispatch => {
     dispatch({ type: FETCH_DATA_START });
     getSchedule(university, groupId, force)
         .then(data => dispatch({ type: FETCH_DATA_FINISHED, payload: data }))
-        .catch(() => dispatch({ type: FETCH_DATA_FAILED }));
+        .catch((e) => dispatch({ type: FETCH_DATA_FAILED }));
 }
 
 export const openMenu = () => dispatch => dispatch({ type: MENU_OPEN });
@@ -72,11 +64,3 @@ export const selectUniversity = uni => dispatch => saveUniversity(uni)
 
 export const selectGroup = group => dispatch => saveGroup(group)
     .then(() => dispatch({ type: SETTINGS_SELECT_GROUP, payload: group }));
-
-export const requestUniversitiesList = () => dispatch => getUniversitiesList()
-    .then(list => dispatch({ type: FETCH_UNIVERSITIES_FINISHED, payload: list }))
-    .catch(() => dispatch({ type: FETCH_UNIVERSITIES_FAILED }));
-
-export const requestGroupsList = () => dispatch => getGroupsList()
-    .then(list => dispatch({ type: FETCH_GROUPS_FINISHED, payload: list }))
-    .catch(() => dispatch({ type: FETCH_GROUPS_FAILED }));

@@ -20,14 +20,18 @@ export const PopupContent = ({
         <View>
             <Text>Выберите университет:</Text>
             <Picker selectedValue={ selectedUniversity } onValueChange={ onUniversitySelect } >
-                { universitiesList.map(uni => <Picker.Item label={ uni.alias } value={ uni.name } />) }
+                <Picker.Item label="-- Выберите университет --" value={ null } key="empty" />
+                { universitiesList.map(uni => (
+                    <Picker.Item label={ uni.alias } value={ uni.name } key={uni.name} />
+                )) }
             </Picker>
         </View>
         { selectedUniversity &&
             <View>
                 <Text>Выберите группу:</Text>
                 <Picker selectedValue={ selectedGroup } onValueChange={ onGroupSelect } >
-                    { groupsList.map(uni => <Picker.Item label={ uni.alias } value={ uni.name } />) }
+                    <Picker.Item label="-- Выберите группу --" value={ null } key="empty" />
+                    { groupsList.map(group => <Picker.Item label={ group } value={ group } key={ group } />) }
                 </Picker>
             </View>
         }
@@ -38,7 +42,10 @@ PopupContent.propTypes = {
     isSelectedWeekNumerator: PropTypes.bool,
     switchIsSelectedWeekNumerator: PropTypes.func,
     selectedUniversity: PropTypes.string,
-    universitiesList: PropTypes.arrayOf(PropTypes.string),
+    universitiesList: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        alias: PropTypes.string,
+    })),
     onUniversitySelect: PropTypes.func,
     selectedGroup: PropTypes.string,
     groupsList: PropTypes.arrayOf(PropTypes.string),

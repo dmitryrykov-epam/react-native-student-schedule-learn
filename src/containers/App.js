@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ActivityIndicator, BackHandler } from 'react-native';
 import { bindActionCreators } from 'redux';
 
-import { requestSchedule, loadIsNumeratorOdd, clearSearch, closeMenu } from './../store/actions';
+import {
+    requestSchedule,
+    loadIsNumeratorOdd,
+    clearSearch,
+    closeMenu,
+    openPopup,
+} from './../store/actions';
 
 import Menu from './Menu';
 import MenuContent from './MenuContent';
@@ -30,16 +36,38 @@ class App extends React.PureComponent {
         isSuccess: PropTypes.bool.isRequired,
         isMenuOpened: PropTypes.bool.isRequired,
         isSearching: PropTypes.bool.isRequired,
+        university: PropTypes.string,
+        group: PropTypes.string,
+        openPopup: PropTypes.func.isRequired,
     }
 
     componentWillMount = () => {
         this.props.loadIsNumeratorOdd();
-        this.props.onRefresh('rsreu', 715);
+        this.requestShedule(this.props.university, this.props.group);
         BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonPress);
     };
 
+    componentDidMount = () => {
+        if (!(this.props.university && this.props.group)) {
+            this.props.openPopup();
+        }
+    }
+
+    componentWillReceiveProps = (props) => {
+        const { university, group } = this.props;
+        if ( university !== props.university || group !== props.group) {
+            this.requestShedule(props.university, props.group);
+        }
+    }
+    
     componentWillUnmount = () => {
         BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonPress);
+    }
+    
+    requestShedule = (university, group) => {
+        if (university && group) {
+            this.props.onRefresh(university, group);
+        }
     }
 
     handleBackButtonPress = () => {
@@ -93,9 +121,12 @@ const mapStateToProps = state => ({
     isSuccess: state.schedule.isSuccess,
     isMenuOpened: state.menu.isOpened,
     isSearching: !!state.search.keyword,
+    university: state.settings.selectedUniversity,
+    group: state.settings.selectedGroup,
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators({
+    openPopup,
     loadIsNumeratorOdd,
     clearSearch,
     closeMenu,

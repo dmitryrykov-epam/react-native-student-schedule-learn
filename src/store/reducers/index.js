@@ -5,6 +5,7 @@ import search from './search';
 import menu from './menu';
 import date from './date';
 import popup from './popup';
+import settings from './settings';
 
 export default combineReducers({
     schedule,
@@ -12,4 +13,5 @@ export default combineReducers({
     menu,
     date,
     popup,
+    settings,
 });

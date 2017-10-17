@@ -2,7 +2,6 @@ import { AsyncStorage } from 'react-native';
 import mockData from './data/';
 
 const storageAppPrefix = '@rnSchedule';
-// const dataServerDomain = 'https://node-schedule.herokuapp.com';
 
 export const getSchedule = async (university, groupId, force = false) => {
     let data;
@@ -14,14 +13,6 @@ export const getSchedule = async (university, groupId, force = false) => {
     }
 
     if (!data) {
-        /*data = await fetch(`${dataServerDomain}/${university}/${groupId}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log('site', data);
-            AsyncStorage.setItem(`${storageAppPrefix}:schedule(${university}|${groupId})`, JSON.stringify(data));
-            return data;
-        });*/
-
         const timeSlots = mockData[university].timeSlots;
         const schedule = mockData[university].schedule;
         
@@ -29,15 +20,14 @@ export const getSchedule = async (university, groupId, force = false) => {
             numerator: schedule[groupId].map(day => day.map(slot => slot ? slot.numerator : null)),
             denominator: schedule[groupId].map(day => day.map(slot => slot ? slot.denominator : null)),
         };
-        const lectorsList = scheduleObject.numerator.concat(scheduleObject.denominator)
+        const lessonObjectsList = scheduleObject.numerator.concat(scheduleObject.denominator)
             .reduce((acc, next) => acc.concat(next), [])
-            .filter(lesson => lesson)
+            .filter(lesson => lesson);
+        const lectorsList = lessonObjectsList
             .map(lesson => lesson.lector)
             .reduce((acc, next) => acc.concat(next), [])
             .reduce((acc, next) => acc.indexOf(next) > -1 ? acc : acc.concat(next), []);
-        const lessonsList = scheduleObject.numerator.concat(scheduleObject.denominator)
-            .reduce((acc, next) => acc.concat(next), [])
-            .filter(lesson => lesson)
+        const lessonsList = lessonObjectsList
             .map(lesson => lesson.name)
             .reduce((acc, next) => acc.indexOf(next) > -1 ? acc : acc.concat(next), []);
 
@@ -46,7 +36,8 @@ export const getSchedule = async (university, groupId, force = false) => {
             schedule: scheduleObject,
             lectorsList,
             lessonsList,
-        }
+        };
+
         AsyncStorage.setItem(`${storageAppPrefix}:schedule(${university}|${groupId})`, JSON.stringify(data));
     }
 
@@ -82,9 +73,3 @@ export const getGroup = () => AsyncStorage
 export const saveGroup = university => AsyncStorage
     .setItem(`${storageAppPrefix}:group`, JSON.stringify(university))
     .then(() => university);
-
-export const getUniversitiesList = () => fetch(`${dataServerDomain}/list`)
-    .then(response => response.json());
-
-export const getGroupsList = uni => fetch(`${dataServerDomain}/${uni}/list`)
-    .then(response => response.json());

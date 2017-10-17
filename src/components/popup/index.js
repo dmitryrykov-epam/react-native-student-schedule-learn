@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Animated, Image, Easing, ScrollView, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Animated, Image, Easing, ScrollView, StyleSheet, TouchableHighlight, TouchableWithoutFeedback } from 'react-native';
 import { Constants } from 'expo';
 
 export class Popup extends React.PureComponent {
@@ -91,7 +91,9 @@ export class Popup extends React.PureComponent {
 
         return (
             <View style={ wrapperStyles } >
-                <Animated.View style={ backdropStyles } />
+                <TouchableWithoutFeedback onPress={ this.props.onClose }>
+                    <Animated.View style={ backdropStyles } />
+                </TouchableWithoutFeedback>
                 <Animated.ScrollView style={ popupStyles } contentContainerStyle={ styles.popupInnerView } >
                     <View style={ styles.contentWrapper } >
                         <View style={ styles.firstLine } >
@@ -119,7 +121,8 @@ const styles = StyleSheet.create({
         elevation: 150,
         top: 0,
         left: 0,
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
     },
     backdrop: {
@@ -133,15 +136,14 @@ const styles = StyleSheet.create({
         left: 0,
     },
     popup: {
-        padding: 20,
-        paddingTop: 20 + Constants.statusBarHeight,
-        elevation: 20,
+        padding: 10,
+        paddingTop: 10 + Constants.statusBarHeight,
+        elevation: 30,
         minWidth: 300,
     },
     popupInnerView: {
         justifyContent: 'center',
         opacity: 1,
-        flex: 1,
         alignItems: 'stretch',
     },
     contentWrapper: {
