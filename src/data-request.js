@@ -1,7 +1,8 @@
 import { AsyncStorage } from 'react-native';
+import mockData from './data/';
 
 const storageAppPrefix = '@rnSchedule';
-const dataServerDomain = 'https://node-schedule.herokuapp.com';
+// const dataServerDomain = 'https://node-schedule.herokuapp.com';
 
 export const getSchedule = async (university, groupId, force = false) => {
     let data;
@@ -13,12 +14,40 @@ export const getSchedule = async (university, groupId, force = false) => {
     }
 
     if (!data) {
-        data = await fetch(`${dataServerDomain}/${university}/${groupId}`)
-            .then(response => response.json())
-            .then(data => {
-                AsyncStorage.setItem(`${storageAppPrefix}:schedule(${university}|${groupId})`, JSON.stringify(data));
-                return data;
-            });
+        /*data = await fetch(`${dataServerDomain}/${university}/${groupId}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('site', data);
+            AsyncStorage.setItem(`${storageAppPrefix}:schedule(${university}|${groupId})`, JSON.stringify(data));
+            return data;
+        });*/
+
+        const timeSlots = mockData[university].timeSlots;
+        const schedule = mockData[university].schedule;
+        
+        const scheduleObject = {
+            numerator: schedule[groupId].map(day => day.map(slot => slot ? slot.numerator : null)),
+            denominator: schedule[groupId].map(day => day.map(slot => slot ? slot.denominator : null)),
+        };
+        const lectorsList = scheduleObject.numerator.concat(scheduleObject.denominator)
+            .reduce((acc, next) => acc.concat(next), [])
+            .filter(lesson => lesson)
+            .map(lesson => lesson.lector)
+            .reduce((acc, next) => acc.concat(next), [])
+            .reduce((acc, next) => acc.indexOf(next) > -1 ? acc : acc.concat(next), []);
+        const lessonsList = scheduleObject.numerator.concat(scheduleObject.denominator)
+            .reduce((acc, next) => acc.concat(next), [])
+            .filter(lesson => lesson)
+            .map(lesson => lesson.name)
+            .reduce((acc, next) => acc.indexOf(next) > -1 ? acc : acc.concat(next), []);
+
+        data = {
+            timeSlots,
+            schedule: scheduleObject,
+            lectorsList,
+            lessonsList,
+        }
+        AsyncStorage.setItem(`${storageAppPrefix}:schedule(${university}|${groupId})`, JSON.stringify(data));
     }
 
     return data;
