@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Animated, Image, Easing, ScrollView, StyleSheet, TouchableHighlight, TouchableWithoutFeedback } from 'react-native';
+import { View, Animated, Image, Easing, ScrollView, StyleSheet, TouchableHighlight, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 
 export class Popup extends React.PureComponent {
@@ -15,43 +15,12 @@ export class Popup extends React.PureComponent {
         onClose: () => undefined,
     }
 
-
     constructor(props) {
         super(props);
 
         this.state = {
-            // animationValue: props.opened ? new Animated.Value(1) : new Animated.Value(0),
             isDisplayed: props.opened,
         }
-        
-        // this.animationOpen = Animated.spring(
-        //     this.state.animationValue,
-        //     {
-        //         toValue: 1,
-        //         useNativeDriver: true,
-        //         friction: 9,
-        //     }
-        // );
-
-        // this.animationClose = Animated.timing(
-        //     this.state.animationValue,
-        //     {
-        //         toValue: 0,
-        //         useNativeDriver: true,
-        //         duration: 200,
-        //         easing: Easing.ease,
-        //     }
-        // );
-
-        // this.translationInterpolation = this.state.animationValue.interpolate({
-        //     inputRange: [0, 1],
-        //     outputRange: [-300, 0],
-        // });
-
-        // this.opacityInterpolation = this.state.animationValue.interpolate({
-        //     inputRange: [0, 1],
-        //     outputRange: [0, 0.5],
-        // });
     }
 
     componentWillReceiveProps = (props) => {
@@ -62,18 +31,16 @@ export class Popup extends React.PureComponent {
     }
 
     handleOpen = () => {
-        // this.state.animationValue.stopAnimation();
         this.setState({ isDisplayed: true });
-        // this.animationOpen.start();
     }
     
     handleClose = () => {
-        // this.state.animationValue.stopAnimation();
-        // this.animationClose.start(() => this.setState({ isDisplayed: false }));
         this.setState({ isDisplayed: false });
     }
 
     render = () => {
+        const { height } = Dimensions.get('window');
+
         const wrapperStyles = StyleSheet.flatten([
             styles.wrapper,
             { display: this.state.isDisplayed ? 'flex' : 'none' },
@@ -81,12 +48,12 @@ export class Popup extends React.PureComponent {
 
         const popupStyles = StyleSheet.flatten([
             styles.popup,
-            // { transform: [{ translateX: this.translationInterpolation }]}
+            { transform: [{ translateY: 0 }]}
         ]);
 
         const backdropStyles = StyleSheet.flatten([
             styles.backdrop,
-            { opacity: 0.5 },
+            { opacity: 0.7 },
         ]);
 
         return (
