@@ -6,6 +6,7 @@ import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native'
 export default class PageHeader extends React.PureComponent {
     static propTypes = {
         onMenuPress: PropTypes.func.isRequired,
+        onSettingsPress: PropTypes.func.isRequired,
         title: PropTypes.string.isRequired,
     };
 
@@ -20,6 +21,11 @@ export default class PageHeader extends React.PureComponent {
                 <View style={ styles.textWrapper } >
                     <Text style={ styles.text } >{ this.props.title }</Text>
                 </View>
+                <TouchableHighlight onPress={ this.props.onSettingsPress } activeOpacity={0.7} underlayColor='#fff' >
+                    <View style={ styles.imageWrapper } >
+                        <Image source={ require('./../../../assets/settings.png') } />
+                    </View>
+                </TouchableHighlight>
             </View>
         );
     }
@@ -32,7 +38,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingTop: Constants.statusBarHeight,
-        paddingRight: 40,
         backgroundColor: '#FFFFFF',
         elevation: 5,
     },

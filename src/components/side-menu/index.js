@@ -86,7 +86,7 @@ export default class SideMenu extends React.PureComponent {
         const backdropStyles = StyleSheet.flatten([
             styles.backdrop,
             { opacity: this.opacityInterpolation },
-        ])
+        ]);
 
         return (
             <TouchableWithoutFeedback onPress={ this.props.onClose } >
